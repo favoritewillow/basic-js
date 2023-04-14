@@ -12,37 +12,14 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  */
 function deleteDigit(number) {
-  let str = number.toString();
-  let arr = Array.from(str, Number);
+  const digits = number.toString().split("");
+  const minDigitIndex = digits.findIndex(
+    (d, i) => i < digits.length - 1 && d < digits[i + 1]
+  );
+  digits.splice(minDigitIndex, 1);
 
-  let digit = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    digit = arr[i];
-    console.log(digit);
-  }
-
-  function minNum(arr) {
-    let minNumber = Math.min(...arr);
-    let filteredNumbers = arr.filter((number) => number !== minNumber);
-    console.log(filteredNumbers);
-    let num = parseInt(filteredNumbers.join(""));
-    filteredNumbers.reverse();
-    let numReverse = parseInt(filteredNumbers.join(""));
-    console.log(num);
-    console.log(numReverse);
-
-    if (num > numReverse) {
-      return num;
-      //console.log(num);
-    } else if (num < numReverse) {
-      return numReverse;
-      //console.log(numReverse);
-    }
-    return -1;
-  }
-
-  minNum(arr);
+  return parseInt(digits.join(""));
+  // console.log(digits.join(''))
 }
 
 let number = 152;
